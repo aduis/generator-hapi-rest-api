@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var changeCase = require('change-case')
 
 module.exports = yeoman.generators.Base.extend({
     initializing: function () {
@@ -21,7 +22,7 @@ module.exports = yeoman.generators.Base.extend({
                 type: 'input',
                 name: 'resource',
                 message: 'Would is the name of your resource?',
-                default: 'my_model'
+                default: 'myModel'
             },
             {
                 type: 'input',
@@ -68,13 +69,53 @@ module.exports = yeoman.generators.Base.extend({
         }.bind(this));
     },
 
-    //todo: add all files and replace placeholders
+    //todo: replace placeholders
 
     writing: {
         app: function () {
             this.fs.copy(
                 this.templatePath('_package.json'),
                 this.destinationPath('package.json')
+                );
+            this.fs.copy(
+                this.templatePath('index.js'),
+                this.destinationPath('index.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/index.js'),
+                this.destinationPath('/lib/index.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/v1/index.js'),
+                this.destinationPath('/lib/v1/index.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/v1/schemas/modelSchema.js'),
+                this.destinationPath('/lib/v1/schemas/' + changeCase.camelCase(this.props.resource) + 'Schema.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/v1/handlers/deleteModelHandler.js'),
+                this.destinationPath('/lib/v1/handlers/delete' + changeCase.pascalCase(this.props.resource) + 'Handler.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/v1/handlers/getModelHandler.js'),
+                this.destinationPath('/lib/v1/handlers/get' + changeCase.pascalCase(this.props.resource) + 'Handler.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/v1/handlers/postModelHandler.js'),
+                this.destinationPath('/lib/v1/handlers/post' + changeCase.pascalCase(this.props.resource) + 'Handler.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/v1/handlers/putModelHandler.js'),
+                this.destinationPath('/lib/v1/handlers/put' + changeCase.pascalCase(this.props.resource) + 'Handler.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/v1/handlers/pingHandler.js'),
+                this.destinationPath('/lib/v1/handlers/pingHandler.js')
+                );
+            this.fs.copy(
+                this.templatePath('/lib/v1/models/modelModel.js'),
+                this.destinationPath('/lib/v1/models/' + changeCase.camelCase(this.props.resource) + 'Model.js')
                 );
         },
 
