@@ -108,23 +108,23 @@ module.exports = yeoman.generators.Base.extend({
                 this.props);
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/schemas/modelSchema.js'),
-                this.destinationPath('/lib/v1/schemas/' + changeCase.camelCase(this.props.resource) + 'Schema.js'),
+                this.destinationPath('/lib/v1/schemas/' + this.props.resource + 'Schema.js'),
                 this.props);
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/deleteModelHandler.js'),
-                this.destinationPath('/lib/v1/handlers/delete' + changeCase.pascalCase(this.props.resource) + 'Handler.js'),
+                this.destinationPath('/lib/v1/handlers/delete' + this.props.Resource + 'Handler.js'),
                 this.props);
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/getModelHandler.js'),
-                this.destinationPath('/lib/v1/handlers/get' + changeCase.pascalCase(this.props.resource) + 'Handler.js'),
+                this.destinationPath('/lib/v1/handlers/get' + this.props.Resource + 'Handler.js'),
                 this.props);
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/postModelHandler.js'),
-                this.destinationPath('/lib/v1/handlers/post' + changeCase.pascalCase(this.props.resource) + 'Handler.js'),
+                this.destinationPath('/lib/v1/handlers/post' + this.props.Resource + 'Handler.js'),
                 this.props);
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/putModelHandler.js'),
-                this.destinationPath('/lib/v1/handlers/put' + changeCase.pascalCase(this.props.resource) + 'Handler.js'),
+                this.destinationPath('/lib/v1/handlers/put' + this.props.Resource + 'Handler.js'),
                 this.props);
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/pingHandler.js'),
@@ -132,7 +132,7 @@ module.exports = yeoman.generators.Base.extend({
                 this.props);
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/models/modelModel.js'),
-                this.destinationPath('/lib/v1/models/' + changeCase.camelCase(this.props.resource) + 'Model.js'),
+                this.destinationPath('/lib/v1/models/' + this.props.Resource + 'Model.js'),
                 this.props);
         },
 
