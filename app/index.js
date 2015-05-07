@@ -63,7 +63,20 @@ module.exports = yeoman.generators.Base.extend({
         ];
 
         this.prompt(prompts, function (props) {
-            this.props = props;
+            var me = this;
+            me.props = props;
+            
+            me.props.resource = changeCase.camelCase(props.resource);
+            me.props.Resource = changeCase.pascalCase(props.resource);
+            var splittedFields = props.fields.split(',');
+            
+            me.props.fields = [];
+            splittedFields.forEach(function(field){
+                var splitted = field.split(':');
+                me.props.fields.push({ "name": splitted[0], "type": splitted[1] });
+            });
+            
+            console.log('props', me.props);
 
             done();
         }.bind(this));
@@ -73,54 +86,54 @@ module.exports = yeoman.generators.Base.extend({
 
     writing: {
         app: function () {
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath('_package.json'),
-                this.destinationPath('package.json')
-                );
-            this.fs.copy(
+                this.destinationPath('package.json'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('index.js'),
-                this.destinationPath('index.js')
-                );
-            this.fs.copy(
+                this.destinationPath('index.js'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('/lib/index.js'),
-                this.destinationPath('/lib/index.js')
-                );
-            this.fs.copy(
+                this.destinationPath('/lib/index.js'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('/lib/v1/index.js'),
-                this.destinationPath('/lib/v1/index.js')
-                );
+                this.destinationPath('/lib/v1/index.js'),
+                this.props);
             this.fs.copyTpl(
                 this.templatePath('/config/config.js'),
                 this.destinationPath('/config/config.js'),
                 this.props);
-            this.fs.copy(
+            this.fs.copyTpl(
                 this.templatePath('/lib/v1/schemas/modelSchema.js'),
-                this.destinationPath('/lib/v1/schemas/' + changeCase.camelCase(this.props.resource) + 'Schema.js')
-                );
-            this.fs.copy(
+                this.destinationPath('/lib/v1/schemas/' + changeCase.camelCase(this.props.resource) + 'Schema.js'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/deleteModelHandler.js'),
-                this.destinationPath('/lib/v1/handlers/delete' + changeCase.pascalCase(this.props.resource) + 'Handler.js')
-                );
-            this.fs.copy(
+                this.destinationPath('/lib/v1/handlers/delete' + changeCase.pascalCase(this.props.resource) + 'Handler.js'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/getModelHandler.js'),
-                this.destinationPath('/lib/v1/handlers/get' + changeCase.pascalCase(this.props.resource) + 'Handler.js')
-                );
-            this.fs.copy(
+                this.destinationPath('/lib/v1/handlers/get' + changeCase.pascalCase(this.props.resource) + 'Handler.js'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/postModelHandler.js'),
-                this.destinationPath('/lib/v1/handlers/post' + changeCase.pascalCase(this.props.resource) + 'Handler.js')
-                );
-            this.fs.copy(
+                this.destinationPath('/lib/v1/handlers/post' + changeCase.pascalCase(this.props.resource) + 'Handler.js'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/putModelHandler.js'),
-                this.destinationPath('/lib/v1/handlers/put' + changeCase.pascalCase(this.props.resource) + 'Handler.js')
-                );
-            this.fs.copy(
+                this.destinationPath('/lib/v1/handlers/put' + changeCase.pascalCase(this.props.resource) + 'Handler.js'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('/lib/v1/handlers/pingHandler.js'),
-                this.destinationPath('/lib/v1/handlers/pingHandler.js')
-                );
-            this.fs.copy(
+                this.destinationPath('/lib/v1/handlers/pingHandler.js'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('/lib/v1/models/modelModel.js'),
-                this.destinationPath('/lib/v1/models/' + changeCase.camelCase(this.props.resource) + 'Model.js')
-                );
+                this.destinationPath('/lib/v1/models/' + changeCase.camelCase(this.props.resource) + 'Model.js'),
+                this.props);
         },
 
         projectfiles: function () {
