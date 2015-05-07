@@ -89,6 +89,10 @@ module.exports = yeoman.generators.Base.extend({
                 this.templatePath('/lib/v1/index.js'),
                 this.destinationPath('/lib/v1/index.js')
                 );
+            this.fs.copyTpl(
+                this.templatePath('/config/config.js'),
+                this.destinationPath('/config/config.js'),
+                this.props);
             this.fs.copy(
                 this.templatePath('/lib/v1/schemas/modelSchema.js'),
                 this.destinationPath('/lib/v1/schemas/' + changeCase.camelCase(this.props.resource) + 'Schema.js')
