@@ -1,10 +1,8 @@
-//todo: insert placholders
-
 var boom = require('boom');
-var Model = require('../models/modelModel');
+var <%= Resource %> = require('../models/<%= resource %>Model');
 
 module.exports.handler = function (request, reply) {
-    Model.remove({ _id: request.params.id }, function (err) {
+    <%= Resource %>.remove({ _id: request.params.id }, function (err) {
       if (err)
         return reply(boom.badImplementation(err));
 

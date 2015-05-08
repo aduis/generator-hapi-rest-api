@@ -1,15 +1,14 @@
-//todo: insert placholders
-
 var boom = require('boom');
-var Model = require('../models/modelModel');
+var <%= Resource %> = require('../models/<%= resource %>Model');
 
 module.exports.handler = function (request, reply) {
-    var model = new Model({
-        name: request.payload.name,
-        image: request.payload.image
+    var <%= resource %> = new <%= Resource %>({
+        <% for(var i=0; i<fields.length; i++) {%>
+           <%= fields[i].name %>: request.payload.<%= fields[i].name %><%if (i != fields.length -1) { %>,<% } %>
+        <% } %>
     });
 
-    model.save(function (err) {
+    <%= resource %>.save(function (err) {
         if (err) {
             return reply(boom.badImplementation(err));
         }

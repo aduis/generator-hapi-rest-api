@@ -1,10 +1,8 @@
-//todo: insert placholders
-
 var boom = require('boom');
-var Model = require('../models/modelModel');
+var <%= Resource %> = require('../models/<%= resource %>Model');
 
 module.exports.handler = function (request, reply) {
-    Model.update({_id: request.param.id}, request.param.payload, {multi: false}, function (err, numAffected) {
+    <%= Resource %>.update({_id: request.param.id}, request.param.payload, {multi: false}, function (err, numAffected) {
         if (err) {
             return reply(boom.badImplementation(err));
         }

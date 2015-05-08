@@ -1,22 +1,20 @@
-//todo: insert placholders
-
 var boom = require('boom');
-var Model = require('../models/modelModel');
+var <%= Resource %> = require('../models/<%= resource %>Model');
 
 module.exports.handler = function (request, reply) {
     if (request.params.id) {
-        Model.findById(request.params.id, function (err, model) {
+        <%= Resource %>.findById(request.params.id, function (err, <%= resource %>) {
             if (err)
                 return reply(boom.badImplementation(err));
 
-            reply(model);
+            reply(<%= resource %>);
         });
     } else {
-        Model.find({}, function (err, models) {
+        <%= Resource %>.find({}, function (err, <%= resources %>) {
             if (err)
                 return reply(boom.badImplementation(err));
 
-            reply(models);
+            reply(<%= resources %>);
         });
     }
 };

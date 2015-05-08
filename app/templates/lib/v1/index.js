@@ -1,14 +1,13 @@
 var ping = require('./handlers/pingHandler.js');
 
-var postModel = require('./handlers/postModelHandler.js');
-var getModel = require('./handlers/getModelHandler.js');
-var putModel = require('./handlers/putModelHandler.js');
-var deleteModel = require('./handlers/deleteModelHandler.js');
+var post<%= Resource %> = require('./handlers/post<%= Resource %>Handler.js');
+var get<%= Resource %> = require('./handlers/get<%= Resource %>Handler.js');
+var put<%= Resource %> = require('./handlers/put<%= Resource %>Handler.js');
+var delete<%= Resource %> = require('./handlers/delete<%= Resource %>Handler.js');
 
-var modelSchema = require('./schemas/modelSchema.js');
+var <%= Resource %>Schema = require('./schemas/<%= Resource %>Schema.js');
 
 //todo: validate id url param
-//todo: insert placholders
 
 module.exports.register = function (plugin, options, next) {
 
@@ -27,47 +26,47 @@ module.exports.register = function (plugin, options, next) {
     });
 
     plugin.route({
-        path: "/v1/models/{id}",
+        path: "/v1/<%= Resources %>/{id}",
         method: "GET",
-        handler: getModel.handler,
+        handler: get<%= Resource %>.handler,
         config: {
-            description: 'get model',
+            description: 'get <%= Resource %>',
             tags: ['api']
         }
     });
 
     plugin.route({
-        path: "/v1/models/{id}",
+        path: "/v1/<%= Resources %>/{id}",
         method: "POST",
-        handler: postModel.handler,
+        handler: post<%= Resource %>.handler,
         config: {
-            description: 'add new model',
+            description: 'add new <%= Resource %>',
             tags: ['api'],
             validate: {
-                payload: modelSchema
+                payload: <%= Resource %>Schema
             }
         }
     });
 
     plugin.route({
-        path: "/v1/models/{id}",
+        path: "/v1/<%= Resources %>/{id}",
         method: "PUT",
-        handler: putModel.handler,
+        handler: put<%= Resource %>.handler,
         config: {
-            description: 'update model',
+            description: 'update <%= Resource %>',
             tags: ['api'],
             validate: {
-                payload: modelSchema
+                payload: <%= Resource %>Schema
             }
         }
     });
 
     plugin.route({
-        path: "/v1/models/{id}",
+        path: "/v1/<%= Resources %>/{id}",
         method: "DELETE",
-        handler: deleteModel.handler,
+        handler: delete<%= Resource %>.handler,
         config: {
-            description: 'delete model',
+            description: 'delete <%= Resource %>',
             tags: ['api']
         }
     });

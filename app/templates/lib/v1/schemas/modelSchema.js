@@ -1,9 +1,7 @@
-//todo: insert placholders
-//todo: generic model
-
 var joi = require('joi');
 
 module.exports = {
-    name: joi.string().required(),
-    image: joi.string().required()
+    <% for(var i=0; i<fields.length; i++) {%>
+       <%= fields[i].name %>: <%= fields[i].type %>().required()<%if (i != fields.length -1) { %>,<% } %>
+    <% } %>
 };

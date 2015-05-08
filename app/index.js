@@ -28,7 +28,7 @@ module.exports = yeoman.generators.Base.extend({
                 type: 'input',
                 name: 'fields',
                 message: 'What are the fields of the resource?',
-                default: 'name:string,value:number,isDeleted:bool'
+                default: 'name:String,value:Number,isDeleted:bool'
             },
             {
                 type: 'input',
@@ -59,13 +59,14 @@ module.exports = yeoman.generators.Base.extend({
                 name: 'giturl',
                 message: 'What is the git url of this project?',
                 default: 'git@github.com:<github_user>/<project_name>'
-            },
+            }
         ];
 
         this.prompt(prompts, function (props) {
             var me = this;
             me.props = props;
             
+            //todo: plural resources
             me.props.resource = changeCase.camelCase(props.resource);
             me.props.Resource = changeCase.pascalCase(props.resource);
             var splittedFields = props.fields.split(',');
@@ -132,7 +133,7 @@ module.exports = yeoman.generators.Base.extend({
                 this.props);
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/models/modelModel.js'),
-                this.destinationPath('/lib/v1/models/' + this.props.Resource + 'Model.js'),
+                this.destinationPath('/lib/v1/models/' + this.props.resource + 'Model.js'),
                 this.props);
         },
 
