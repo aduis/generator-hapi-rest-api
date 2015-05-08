@@ -1,12 +1,12 @@
 {
-  "name": "cleverbridge_api_productApi",
+  "name": "<%= project %>",
   "version": "0.0.0",
-  "description": "productApi api",
+  "description": "<%= resource %> api",
   "main": "index.js",
   "scripts": {"start": "node index.js"},
   "repository": {
     "type": "git",
-    "url": "git@github.com:aduis/hapi-rabbit.git"
+    "url": "<%= giturl %>"
   },
   "license": "ISC",
   "dependencies": {

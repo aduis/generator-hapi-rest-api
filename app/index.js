@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var plural = require('plural');
 var changeCase = require('change-case')
 
 module.exports = yeoman.generators.Base.extend({
@@ -66,7 +67,8 @@ module.exports = yeoman.generators.Base.extend({
             var me = this;
             me.props = props;
             
-            //todo: plural resources
+            me.props.resources = plural(props.resource);
+            me.props.Resources = plural(props.Resources);
             me.props.resource = changeCase.camelCase(props.resource);
             me.props.Resource = changeCase.pascalCase(props.resource);
             var splittedFields = props.fields.split(',');
