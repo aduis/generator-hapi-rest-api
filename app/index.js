@@ -16,7 +16,7 @@ module.exports = yeoman.generators.Base.extend({
 
         // Have Yeoman greet the user.
         this.log(yosay(
-            'Welcome to the sensational ' + chalk.red('HapiRestGenerator') + ' generator!'
+            'Welcome to the sensational ' + chalk.red('HapiRestAPI') + ' generator!'
             ));
 
         var prompts = [
