@@ -6,6 +6,6 @@ module.exports.handler = function (request, reply) {
       if (err)
         return reply(boom.badImplementation(err));
 
-      reply('OK');
+      reply(request.params.id);
     });
 };

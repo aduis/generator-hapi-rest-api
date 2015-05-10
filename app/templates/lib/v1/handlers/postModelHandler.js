@@ -8,11 +8,11 @@ module.exports.handler = function (request, reply) {
         <% } %>
     });
 
-    <%= resource %>.save(function (err) {
+    <%= resource %>.save(function (err, <%= resource %>) {
         if (err) {
             return reply(boom.badImplementation(err));
         }
 
-        reply('OK');
+        reply(<%= resource %>._id);
     });
 };
