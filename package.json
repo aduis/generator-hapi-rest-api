@@ -1,7 +1,7 @@
 {
   "name": "generator-hapi-rest-api",
-  "version": "0.0.3",
-  "description": "Yeoman generator",
+  "version": "0.0.4",
+  "description": "Scaffold a hapijs, mongoose REST api.",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "aduis/generator-hapi-rest-api",
