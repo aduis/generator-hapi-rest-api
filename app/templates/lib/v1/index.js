@@ -1,3 +1,5 @@
+var joi = require('joi');
+
 var ping = require('./handlers/pingHandler.js');
 
 var post<%= Resource %> = require('./handlers/post<%= Resource %>Handler.js');
@@ -6,8 +8,6 @@ var put<%= Resource %> = require('./handlers/put<%= Resource %>Handler.js');
 var delete<%= Resource %> = require('./handlers/delete<%= Resource %>Handler.js');
 
 var <%= Resource %>Schema = require('./schemas/<%= Resource %>Schema.js');
-
-//todo: validate id url param
 
 module.exports.register = function (plugin, options, next) {
 
@@ -28,7 +28,7 @@ module.exports.register = function (plugin, options, next) {
     plugin.route({
         path: "/v1/<%= resources %>/{id}",
         method: "GET",
-        handler: get <%= Resource %>.handler,
+        handler: get<%= Resource %>.handler,
         config: {
             description: 'get <%= Resource %>',
             tags: ['api'],
@@ -43,7 +43,7 @@ module.exports.register = function (plugin, options, next) {
     plugin.route({
         path: "/v1/<%= resources %>",
         method: "POST",
-        handler: post <%= Resource %>.handler,
+        handler: post<%= Resource %>.handler,
         config: {
             description: 'add new <%= Resource %>',
             tags: ['api'],
@@ -56,7 +56,7 @@ module.exports.register = function (plugin, options, next) {
     plugin.route({
         path: "/v1/<%= resources %>/{id}",
         method: "PUT",
-        handler: put <%= Resource %>.handler,
+        handler: put<%= Resource %>.handler,
         config: {
             description: 'update <%= Resource %>',
             tags: ['api'],
@@ -72,12 +72,14 @@ module.exports.register = function (plugin, options, next) {
     plugin.route({
         path: "/v1/<%= resources %>/{id}",
         method: "DELETE",
-        handler: delete <%= Resource %>.handler,
+        handler: delete<%= Resource %>.handler,
         config: {
             description: 'delete <%= Resource %>',
             tags: ['api'],
-            params: {
-                id: joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+            validate:{
+                params: {
+                    id: joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+                }
             }
         }
     });
