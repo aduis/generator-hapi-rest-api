@@ -87,8 +87,6 @@ module.exports = yeoman.generators.Base.extend({
                 });
             });
 
-            console.log('props', me.props);
-
             done();
         }.bind(this));
     },
