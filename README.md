@@ -1,10 +1,22 @@
-# generator-hapi-rest-api [![Build Status](https://secure.travis-ci.org/aduis/generator-hapi-rest-api.png?branch=master)](https://travis-ci.org/aduis/generator-hapi-rest-api)
+# Hapi REST API generator (generator-hapi-rest-api) [![Build Status](https://secure.travis-ci.org/aduis/generator-hapi-rest-api.png?branch=master)](https://travis-ci.org/aduis/generator-hapi-rest-api)
 
 > [Yeoman](http://yeoman.io) generator
 
-# Hapi REST API generator
-
 This generator generates a simple REST api using hapijs framework. Just follow the generator instructions and create your own api.
+
+## API setup
+
+* Framework: Hapijs
+* Database: Mongodb via mongoose
+* Documenation: swagger via hapi-swagger plugin
+
+## API structure
+
+* Server definition: /lib/index.js (Plugins, ports, etc.)
+* Version 1 of api as plugin: /lib/v1/index.js (routes, params, validations, etc.)
+* Joi validation schema for post and put route: /lib/v1/schemas/modelSchema.js
+* Mongoose model: /lib/v1/models/modelModel.js
+* Request handler: /lib/v1/handlers/*.js (get, post, put, delete handlers)
 
 ## Getting started (sample address api):
 
@@ -26,6 +38,13 @@ This generator generates a simple REST api using hapijs framework. Just follow t
 	node index
 	
 	go to http://localhost:8500/documentation
+	
+## What's next? 
+
+* add tests
+* add authentication
+* add docker support
+* add subgenerators for new routes, models, schemas, ...
 	
 ## License
 
