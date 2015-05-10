@@ -26,19 +26,24 @@ module.exports.register = function (plugin, options, next) {
     });
 
     plugin.route({
-        path: "/v1/<%= Resources %>/{id}",
+        path: "/v1/<%= resources %>/{id}",
         method: "GET",
-        handler: get<%= Resource %>.handler,
+        handler: get <%= Resource %>.handler,
         config: {
             description: 'get <%= Resource %>',
-            tags: ['api']
+            tags: ['api'],
+            validate: {
+                params: {
+                    id: joi.string().regex(/^[0-9a-fA-F]{24}$/)
+                }
+            }
         }
     });
 
     plugin.route({
-        path: "/v1/<%= Resources %>/{id}",
+        path: "/v1/<%= resources %>",
         method: "POST",
-        handler: post<%= Resource %>.handler,
+        handler: post <%= Resource %>.handler,
         config: {
             description: 'add new <%= Resource %>',
             tags: ['api'],
@@ -49,25 +54,31 @@ module.exports.register = function (plugin, options, next) {
     });
 
     plugin.route({
-        path: "/v1/<%= Resources %>/{id}",
+        path: "/v1/<%= resources %>/{id}",
         method: "PUT",
-        handler: put<%= Resource %>.handler,
+        handler: put <%= Resource %>.handler,
         config: {
             description: 'update <%= Resource %>',
             tags: ['api'],
             validate: {
-                payload: <%= Resource %>Schema
+                payload: <%= Resource %>Schema,
+                params: {
+                    id: joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+                }
             }
         }
     });
 
     plugin.route({
-        path: "/v1/<%= Resources %>/{id}",
+        path: "/v1/<%= resources %>/{id}",
         method: "DELETE",
-        handler: delete<%= Resource %>.handler,
+        handler: delete <%= Resource %>.handler,
         config: {
             description: 'delete <%= Resource %>',
-            tags: ['api']
+            tags: ['api'],
+            params: {
+                id: joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
+            }
         }
     });
 

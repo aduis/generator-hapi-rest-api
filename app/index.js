@@ -3,7 +3,8 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var plural = require('plural');
-var changeCase = require('change-case')
+var changeCase = require('change-case');
+var schemas = require("./schemas");
 
 module.exports = yeoman.generators.Base.extend({
     initializing: function () {
@@ -23,13 +24,13 @@ module.exports = yeoman.generators.Base.extend({
                 type: 'input',
                 name: 'resource',
                 message: 'Would is the name of your resource?',
-                default: 'myModel'
+                default: 'address'
             },
             {
                 type: 'input',
                 name: 'fields',
                 message: 'What are the fields of the resource?',
-                default: 'name:String,value:Number,isDeleted:bool'
+                default: 'street:string,street_number:number,postcode:number,city:string,is_deleted:bool'
             },
             {
                 type: 'input',
@@ -41,13 +42,13 @@ module.exports = yeoman.generators.Base.extend({
                 type: 'input',
                 name: 'project',
                 message: 'What is the name of your project?',
-                default: 'my_model_rest_api'
+                default: 'address_rest_api'
             },
             {
                 type: 'input',
                 name: 'db_collection',
                 message: 'What is the name of the db collection?',
-                default: 'my_model_collection'
+                default: 'addresses'
             },
             {
                 type: 'input',
@@ -67,25 +68,30 @@ module.exports = yeoman.generators.Base.extend({
             var me = this;
             me.props = props;
             
-            me.props.resources = plural(props.resource);
-            me.props.Resources = plural(props.Resources);
             me.props.resource = changeCase.camelCase(props.resource);
             me.props.Resource = changeCase.pascalCase(props.resource);
+
+            me.props.resources = plural(me.props.resource);
+            me.props.Resources = plural(me.props.Resource);
+
             var splittedFields = props.fields.split(',');
             
             me.props.fields = [];
             splittedFields.forEach(function(field){
                 var splitted = field.split(':');
-                me.props.fields.push({ "name": splitted[0], "type": splitted[1] });
+                me.props.fields.push({ 
+                    "name": splitted[0], 
+                    "type": splitted[1], 
+                    "mongoose": schemas.mongoose[splitted[1]], 
+                    "joi": schemas.joi[splitted[1]]
+                });
             });
-            
+
             console.log('props', me.props);
 
             done();
         }.bind(this));
     },
-
-    //todo: replace placeholders
 
     writing: {
         app: function () {
