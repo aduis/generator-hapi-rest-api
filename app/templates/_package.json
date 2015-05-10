@@ -8,7 +8,7 @@
     "type": "git",
     "url": "<%= giturl %>"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "boom": "^2.7.0",
     "hapi": "^8.4.0",
