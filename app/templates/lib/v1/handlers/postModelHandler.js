@@ -13,6 +13,6 @@ module.exports.handler = function (request, reply) {
             return reply(boom.badImplementation(err));
         }
 
-        reply(<%= resource %>._id);
+        reply(<%= resource %>._id.toString());
     });
 };

@@ -26,7 +26,7 @@ module.exports.register = function (plugin, options, next) {
     });
 
     plugin.route({
-        path: "/v1/<%= resources %>/{id}",
+        path: "/v1/<%= resources %>/{id?}",
         method: "GET",
         handler: get<%= Resource %>.handler,
         config: {
