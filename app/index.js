@@ -67,7 +67,7 @@ module.exports = yeoman.generators.Base.extend({
         this.prompt(prompts, function (props) {
             var me = this;
             me.props = props;
-            
+
             me.props.resource = changeCase.camelCase(props.resource);
             me.props.Resource = changeCase.pascalCase(props.resource);
 
@@ -75,14 +75,14 @@ module.exports = yeoman.generators.Base.extend({
             me.props.Resources = plural(me.props.Resource);
 
             var splittedFields = props.fields.split(',');
-            
+
             me.props.fields = [];
             splittedFields.forEach(function(field){
                 var splitted = field.split(':');
-                me.props.fields.push({ 
-                    "name": splitted[0], 
-                    "type": splitted[1], 
-                    "mongoose": schemas.mongoose[splitted[1]], 
+                me.props.fields.push({
+                    "name": splitted[0],
+                    "type": splitted[1],
+                    "mongoose": schemas.mongoose[splitted[1]],
                     "joi": schemas.joi[splitted[1]]
                 });
             });
@@ -140,6 +140,27 @@ module.exports = yeoman.generators.Base.extend({
             this.fs.copyTpl(
                 this.templatePath('/lib/v1/models/modelModel.js'),
                 this.destinationPath('/lib/v1/models/' + this.props.resource + 'Model.js'),
+                this.props);
+
+            this.fs.copyTpl(
+                this.templatePath('/test/getModelHandler.spec.js'),
+                this.destinationPath('/test/get' + this.props.Resource + 'Handler.spec.js'),
+                this.props);
+            this.fs.copyTpl(
+                this.templatePath('/test/postModelHandler.spec.js'),
+                this.destinationPath('/test/post' + this.props.Resource + 'Handler.spec.js'),
+                this.props);
+            this.fs.copyTpl(
+                this.templatePath('/test/putModelHandler.spec.js'),
+                this.destinationPath('/test/put' + this.props.Resource + 'Handler.spec.js'),
+                this.props);
+            this.fs.copyTpl(
+                this.templatePath('/test/deleteModelHandler.spec.js'),
+                this.destinationPath('/test/delete' + this.props.Resource + 'Handler.spec.js'),
+                this.props);
+            this.fs.copyTpl(
+                this.templatePath('/test/pingHandler.spec.js'),
+                this.destinationPath('/test/pingHandler.spec.js'),
                 this.props);
         },
 
