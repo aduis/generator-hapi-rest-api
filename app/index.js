@@ -100,6 +100,10 @@ module.exports = yeoman.generators.Base.extend({
     writing: {
         app: function () {
             this.fs.copyTpl(
+                this.templatePath('README.md'),
+                this.destinationPath('README.md'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('.coveralls.yml'),
                 this.destinationPath('.coveralls.yml'),
                 this.props);
