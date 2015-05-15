@@ -104,6 +104,10 @@ module.exports = yeoman.generators.Base.extend({
                 this.destinationPath('README.md'),
                 this.props);
             this.fs.copyTpl(
+                this.templatePath('Dockerfile'),
+                this.destinationPath('Dockerfile'),
+                this.props);
+            this.fs.copyTpl(
                 this.templatePath('.coveralls.yml'),
                 this.destinationPath('.coveralls.yml'),
                 this.props);

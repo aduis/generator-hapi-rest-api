@@ -7,7 +7,7 @@ var get<%= Resource %> = require('./handlers/get<%= Resource %>Handler.js');
 var put<%= Resource %> = require('./handlers/put<%= Resource %>Handler.js');
 var delete<%= Resource %> = require('./handlers/delete<%= Resource %>Handler.js');
 
-var <%= Resource %>Schema = require('./schemas/<%= Resource %>Schema.js');
+var <%= resource %>Schema = require('./schemas/<%= resource %>Schema.js');
 
 module.exports.register = function (plugin, options, next) {
 
@@ -48,7 +48,7 @@ module.exports.register = function (plugin, options, next) {
             description: 'add new <%= Resource %>',
             tags: ['api'],
             validate: {
-                payload: <%= Resource %>Schema
+                payload: <%= resource %>Schema
             }
         }
     });
@@ -61,7 +61,7 @@ module.exports.register = function (plugin, options, next) {
             description: 'update <%= Resource %>',
             tags: ['api'],
             validate: {
-                payload: <%= Resource %>Schema,
+                payload: <%= resource %>Schema,
                 params: {
                     id: joi.string().regex(/^[0-9a-fA-F]{24}$/).required()
                 }

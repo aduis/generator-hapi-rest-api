@@ -44,7 +44,6 @@ This generator generates a simple REST api using hapijs framework. Just follow t
 * todo: add acceptance tests
 * todo: use npm config module
 * todo: add authentication
-* todo: add docker support
 * add subgenerators for new routes, models, schemas, ...
 	
 ## License

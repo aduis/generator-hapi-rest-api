@@ -25,6 +25,12 @@
 ## tests
 
     grunt test
+    
+## start with docker
+    
+    docker build -t <%= resource %>api .
+    docker run -d --name db mongo
+    docker run -d -p <%= port %>:<%= port %> --link db:db <%= resource %>api
 
 ## License
 
