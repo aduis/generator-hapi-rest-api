@@ -1,37 +1,39 @@
 {
-  "name": "<%= project %>",
-  "version": "0.0.0",
-  "description": "<%= resource %> api",
-  "main": "index.js",
-  "scripts": {"start": "node index.js"},
-  "repository": {
-    "type": "git",
-    "url": "<%= giturl %>"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "boom": "^2.7.0",
-    "hapi": "^8.4.0",
-    "hapi-swagger": "^0.6.2",
-    "joi": "^4.9.0",
-    "lodash": "^2.4.1",
-    "mongoose": "^4.0.1"
-  },
-  "devDependencies": {
-    "chai": "^1.10.0",
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-cucumber": "^0.2.3",
-    "grunt-exec": "^0.4.6",
-    "grunt-includes": "~0.4.0",
-    "grunt-mocha-cov": "^0.3.0",
-    "grunt-mocha-istanbul": "^2.2.0",
-    "grunt-mocha-test": "^0.12.4",
-    "grunt-sonar-runner": "^2.3.3",
-    "istanbul": "^0.3.5",
-    "matchdep": "^0.3.0",
-    "mocha": "^2.0.1",
-    "supertest": "^0.15.0"
-  }
+    "name": "<%= project %>",
+    "version": "0.0.0",
+    "description": "<%= resource %> api",
+    "main": "index.js",
+    "scripts": {"start": "node index.js"},
+    "repository": {
+        "type": "git",
+        "url": "<%= giturl %>"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "boom": "^2.7.0",
+        "hapi": "^8.4.0",
+        "hapi-swagger": "^0.6.2",
+        "joi": "^4.9.0",
+        "lodash": "^2.4.1",
+        "mongoose": "^4.0.1"
+    },
+    "devDependencies": {
+        "chai": "^1.10.0",
+        "grunt": "^0.4.5",
+        "grunt-contrib-jshint": "^0.10.0",
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-cucumber": "^0.2.3",
+        "grunt-exec": "^0.4.6",
+        "grunt-includes": "~0.4.0",
+        "grunt-mocha-cov": "^0.3.0",
+        "grunt-mocha-istanbul": "^2.2.0",
+        "grunt-mocha-test": "^0.12.4",
+        "grunt-sonar-runner": "^2.3.3",
+        "istanbul": "^0.3.5",
+        "matchdep": "^0.3.0",
+        "mocha": "^2.0.1",
+        "supertest": "^0.15.0",
+        "sinon": "^1.14.1",
+        "sinon-chai": "^2.7.0"
+    }
 }

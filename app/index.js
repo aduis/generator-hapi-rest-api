@@ -61,6 +61,11 @@ module.exports = yeoman.generators.Base.extend({
                 name: 'giturl',
                 message: 'What is the git url of this project?',
                 default: 'git@github.com:<github_user>/<project_name>'
+            },
+            {
+                type: 'input',
+                name: 'coverallskey',
+                message: 'Do you have a coveralls key?'
             }
         ];
 
@@ -83,7 +88,8 @@ module.exports = yeoman.generators.Base.extend({
                     "name": splitted[0],
                     "type": splitted[1],
                     "mongoose": schemas.mongoose[splitted[1]],
-                    "joi": schemas.joi[splitted[1]]
+                    "joi": schemas.joi[splitted[1]],
+                    "sample": schemas.sample[splitted[1]]
                 });
             });
 
@@ -93,6 +99,18 @@ module.exports = yeoman.generators.Base.extend({
 
     writing: {
         app: function () {
+            this.fs.copyTpl(
+                this.templatePath('.coveralls.yml'),
+                this.destinationPath('.coveralls.yml'),
+                this.props);
+            this.fs.copyTpl(
+                this.templatePath('.travis.yml'),
+                this.destinationPath('.travis.yml'),
+                this.props);
+            this.fs.copyTpl(
+                this.templatePath('Gruntfile.js'),
+                this.destinationPath('Gruntfile.js'),
+                this.props);
             this.fs.copyTpl(
                 this.templatePath('_package.json'),
                 this.destinationPath('package.json'),
@@ -143,24 +161,24 @@ module.exports = yeoman.generators.Base.extend({
                 this.props);
 
             this.fs.copyTpl(
-                this.templatePath('/test/getModelHandler.spec.js'),
-                this.destinationPath('/test/get' + this.props.Resource + 'Handler.spec.js'),
+                this.templatePath('/test/getModelHandler.specs.js'),
+                this.destinationPath('/test/get' + this.props.Resource + 'Handler.specs.js'),
                 this.props);
             this.fs.copyTpl(
-                this.templatePath('/test/postModelHandler.spec.js'),
-                this.destinationPath('/test/post' + this.props.Resource + 'Handler.spec.js'),
+                this.templatePath('/test/postModelHandler.specs.js'),
+                this.destinationPath('/test/post' + this.props.Resource + 'Handler.specs.js'),
                 this.props);
             this.fs.copyTpl(
-                this.templatePath('/test/putModelHandler.spec.js'),
-                this.destinationPath('/test/put' + this.props.Resource + 'Handler.spec.js'),
+                this.templatePath('/test/putModelHandler.specs.js'),
+                this.destinationPath('/test/put' + this.props.Resource + 'Handler.specs.js'),
                 this.props);
             this.fs.copyTpl(
-                this.templatePath('/test/deleteModelHandler.spec.js'),
-                this.destinationPath('/test/delete' + this.props.Resource + 'Handler.spec.js'),
+                this.templatePath('/test/deleteModelHandler.specs.js'),
+                this.destinationPath('/test/delete' + this.props.Resource + 'Handler.specs.js'),
                 this.props);
             this.fs.copyTpl(
-                this.templatePath('/test/pingHandler.spec.js'),
-                this.destinationPath('/test/pingHandler.spec.js'),
+                this.templatePath('/test/pingHandler.specs.js'),
+                this.destinationPath('/test/pingHandler.specs.js'),
                 this.props);
         },
 
@@ -177,6 +195,6 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     install: function () {
-        this.installDependencies();
+        this.installDependencies({ bower: false });
     }
 });
