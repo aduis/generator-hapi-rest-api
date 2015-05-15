@@ -10,9 +10,8 @@ describe('post<%= Resource %>Handler', function () {
 
     describe('without error', function () {
         var request = {
-            payload: {
-                <% for(var i=0; i<fields.length; i++) {%>
-                    <%= fields[i].name %>: <%= fields[i].sample %><%if (i != fields.length -1) { %>,<% } %><% } %>
+            payload: { <% for(var i=0; i<fields.length; i++) {%>
+                <%= fields[i].name %>: <%= fields[i].sample %><%if (i != fields.length -1) { %>,<% } %><% } %>
             }
         };
 
@@ -43,9 +42,8 @@ describe('post<%= Resource %>Handler', function () {
 
     describe('with error', function () {
         var request = {
-            payload: {
-                <% for(var i=0; i<fields.length; i++) {%>
-                    <%= fields[i].name %>: <%= fields[i].sample %><%if (i != fields.length -1) { %>,<% } %><% } %>
+            payload: { <% for(var i=0; i<fields.length; i++) {%>
+                <%= fields[i].name %>: <%= fields[i].sample %><%if (i != fields.length -1) { %>,<% } %><% } %>
             }
         };
 

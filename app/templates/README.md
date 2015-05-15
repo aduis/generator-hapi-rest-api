@@ -5,9 +5,8 @@
     http://localhost:<%= port %>/documentation
 
 ## model
-
     <% for(var i=0; i<fields.length; i++) {%>
-       <%= fields[i].name %>: <%= fields[i].type %><%if (i != fields.length -1) { %>,<% } %><% } %>
+    <%= fields[i].name %>: <%= fields[i].type %><%if (i != fields.length -1) { %>,<% } %><% } %>
     
     /lib/v1/models/<%= resource %>Model.js
 

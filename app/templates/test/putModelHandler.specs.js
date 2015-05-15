@@ -14,9 +14,8 @@ describe('put<%= Resource %>Handler', function () {
             params: {
                 id: '554f284318f361904bda49e1'
             },
-            payload: {
-                <% for(var i=0; i<fields.length; i++) {%>
-                    <%= fields[i].name %>: <%= fields[i].sample %><%if (i != fields.length -1) { %>,<% } %><% } %>
+            payload: { <% for(var i=0; i<fields.length; i++) {%>
+                <%= fields[i].name %>: <%= fields[i].sample %><%if (i != fields.length -1) { %>,<% } %><% } %>
             }
         };
 
@@ -51,9 +50,8 @@ describe('put<%= Resource %>Handler', function () {
             params: {
                 id: '554f284318f361904bda49e1'
             },
-            payload: {
-                <% for(var i=0; i<fields.length; i++) {%>
-                    <%= fields[i].name %>: <%= fields[i].sample %><%if (i != fields.length -1) { %>,<% } %><% } %>
+            payload: { <% for(var i=0; i<fields.length; i++) {%>
+                <%= fields[i].name %>: <%= fields[i].sample %><%if (i != fields.length -1) { %>,<% } %><% } %>
             }
         };
 
