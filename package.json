@@ -1,6 +1,6 @@
 {
   "name": "generator-hapi-rest-api",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Scaffold a hapijs, mongoose REST api.",
   "license": "MIT",
   "main": "app/index.js",
