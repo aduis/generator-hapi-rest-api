@@ -4,20 +4,23 @@ module.exports = {
         "number": "Number",
         "date": "Date",
         "bool": "Boolean",
-        "array": "[]"
+        "array": "[]",
+        "object": "Schema.Types.Mixed"
     },
     "joi": {
         "string": "string",
         "number": "number",
         "date": "date",
         "bool": "boolean",
-        "array": "array"
+        "array": "array",
+        "object": "object"
     },
     "sample": {
         "string": "'string'",
         "number": 200,
         "date": new Date(),
         "bool": false,
-        "array": ['test']
+        "array": ['test'],
+        "object": "{}"
     }
 };
