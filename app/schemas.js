@@ -5,7 +5,7 @@ module.exports = {
         "date": "Date",
         "bool": "Boolean",
         "array": "[]",
-        "object": "Schema.Types.Mixed"
+        "object": "{}"
     },
     "joi": {
         "string": "string",
