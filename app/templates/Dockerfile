@@ -4,6 +4,8 @@ RUN useradd -ms /bin/bash node
 ADD . /home/node/src
 RUN chown -R node:node /home/node
 
+RUN rm -rf /home/node/src/node_modules
+
 USER node
 ENV HOME /home/node
 
