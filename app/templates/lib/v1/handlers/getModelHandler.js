@@ -10,7 +10,9 @@ module.exports.handler = function (request, reply) {
             reply(<%= resource %>);
         });
     } else {
-        <%= Resource %>.find({}, function (err, <%= resources %>) {
+        var query = request.query;
+
+        <%= Resource %>.find(query, function (err, <%= resources %>) {
             if (err)
                 return reply(boom.badImplementation(err));
 

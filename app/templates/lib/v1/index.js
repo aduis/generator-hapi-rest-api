@@ -35,6 +35,9 @@ module.exports.register = function (plugin, options, next) {
             validate: {
                 params: {
                     id: joi.string().regex(/^[0-9a-fA-F]{24}$/)
+                },
+                query: { <% for(var i=0; i<query.length; i++) {%>
+                    <%= query[i].name %>: joi.<%= query[i].joi %>()<%if (i != query.length -1) { %>,<% } %><% } %>
                 }
             }
         }

@@ -17,6 +17,7 @@ module.exports = yeoman.generators.Base.extend({
 
         this.option('resource');
         this.option('fields');
+        this.option('query');
         this.option('port');
         this.option('project');
         this.option('dbcollection');
@@ -50,6 +51,14 @@ module.exports = yeoman.generators.Base.extend({
                 type: 'input',
                 name: 'fields',
                 message: 'What are the fields of the resource?',
+                default: 'street:string,street_number:number,postcode:number,city:string,is_deleted:bool'
+            });
+
+        if (!this.options.query)
+            prompts.push({
+                type: 'input',
+                name: 'query',
+                message: 'What are additional query parameters for your get route?',
                 default: 'street:string,street_number:number,postcode:number,city:string,is_deleted:bool'
             });
 
@@ -110,19 +119,40 @@ module.exports = yeoman.generators.Base.extend({
             me.props.resources = plural(me.props.resource);
             me.props.Resources = plural(me.props.Resource);
 
-            var splittedFields = props.fields.split(',');
+            if (props.fields && typeof props.fields === "string") {
+                var splittedFields = props.fields.split(',');
 
-            me.props.fields = [];
-            splittedFields.forEach(function (field) {
-                var splitted = field.split(':');
-                me.props.fields.push({
-                    "name": splitted[0],
-                    "type": splitted[1],
-                    "mongoose": schemas.mongoose[splitted[1]],
-                    "joi": schemas.joi[splitted[1]],
-                    "sample": schemas.sample[splitted[1]]
+                me.props.fields = [];
+                splittedFields.forEach(function (field) {
+                    var splitted = field.split(':');
+                    me.props.fields.push({
+                        "name": splitted[0],
+                        "type": splitted[1],
+                        "mongoose": schemas.mongoose[splitted[1]],
+                        "joi": schemas.joi[splitted[1]],
+                        "sample": schemas.sample[splitted[1]]
+                    });
                 });
-            });
+            }else {
+                me.props.fields = [];
+            }
+
+            if (props.query && typeof props.query === "string") {
+                var splittedQuery = props.query.split(',');
+
+                me.props.query = [];
+                splittedQuery.forEach(function (query) {
+                    var splitted = query.split(':');
+                    me.props.query.push({
+                        "name": splitted[0],
+                        "type": splitted[1],
+                        "joi": schemas.joi[splitted[1]],
+                        "sample": schemas.sample[splitted[1]]
+                    });
+                });
+            }else{
+                me.props.query = [];
+            }
 
             done();
         }.bind(this));

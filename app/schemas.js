@@ -18,7 +18,7 @@ module.exports = {
     "sample": {
         "string": "'string'",
         "number": 200,
-        "date": new Date(),
+        "date": "new Date()",
         "bool": false,
         "array": ['test'],
         "object": "{}"
