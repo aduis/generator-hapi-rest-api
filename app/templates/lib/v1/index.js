@@ -41,12 +41,31 @@ module.exports.register = function (plugin, options, next) {
                 }
             },
             plugins: {
-                <%if (links.length > 0) { %>hal: {
-                    links: { <% for(var i=0; i<links.length; i++) {%>
+                hal: {
+                    <%if (links.length > 0) { %>links: { <% for(var i=0; i<links.length; i++) {%>
                         '<%= links[i].name %>': '<%= links[i].link %>{<%= links[i].property %>}'<%if (i != links.length -1) { %>,<% } %><% } %>
                     },
-                    ignore: [<% for(var i=0; i<links.length; i++) {%>'<%= links[i].property %>'<%if (i != links.length -1) { %>,<% } %><% } %>, '_id']
-                }<% } %>
+                    ignore: [<% for(var i=0; i<links.length; i++) {%>'<%= links[i].property %>'<%if (i != links.length -1) { %>,<% } %><% } %>, '_id'],<% } %>
+                    prepare: function (rep, next) {
+
+                        if(rep.entity._customer){
+                            rep.embed('customer', '/v1/customers/' + rep.entity._customer._id, rep.entity._customer);
+                            rep.ignore('_customer');
+                        }
+
+                        if(rep.entity.cart){
+                            rep.entity.cart.forEach(function (cartItem) {
+
+                                var link = '/v1/' + (cartItem._room ? 'rooms' : 'services') + '/' + cartItem._id;
+                                var embed = rep.embed('cart', link, cartItem);
+                                embed.ignore('_room');
+                                embed.ignore('_service');
+                            });
+                            rep.ignore('cart');
+                        }
+                        next();
+                    }
+                }
             }
         }
     });
