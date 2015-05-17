@@ -62,6 +62,14 @@ module.exports = yeoman.generators.Base.extend({
                 default: 'street:string,street_number:number,postcode:number,city:string,is_deleted:bool'
             });
 
+        if (!this.options.links)
+            prompts.push({
+                type: 'input',
+                name: 'links',
+                message: 'What links do you want to be included into hal links section?',
+                default: 'hotel:/v1/hotels/:_hotel,client:/v1/clients/:_client'
+            });
+
         if (!this.options.port)
             prompts.push({
                 type: 'input',
@@ -152,6 +160,22 @@ module.exports = yeoman.generators.Base.extend({
                 });
             }else{
                 me.props.query = [];
+            }
+
+            if (props.links && typeof props.links === "string") {
+                var splittedLinks = props.links.split(',');
+
+                me.props.links = [];
+                splittedLinks.forEach(function (link) {
+                    var splitted = link.split(':');
+                    me.props.links.push({
+                        "name": splitted[0],
+                        "link": splitted[1],
+                        "property": splitted[2]
+                    });
+                });
+            }else{
+                me.props.links = [];
             }
 
             done();

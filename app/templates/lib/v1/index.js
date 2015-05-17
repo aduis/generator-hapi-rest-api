@@ -39,6 +39,14 @@ module.exports.register = function (plugin, options, next) {
                 query: { <% for(var i=0; i<query.length; i++) {%>
                     <%= query[i].name %>: joi.<%= query[i].joi %>()<%if (i != query.length -1) { %>,<% } %><% } %>
                 }
+            },
+            plugins: {
+                <%if (links.length > 0) { %>hal: {
+                    links: { <% for(var i=0; i<links.length; i++) {%>
+                        '<%= links[i].name %>': '<%= links[i].link %>{<%= links[i].property %>}'<%if (i != links.length -1) { %>,<% } %><% } %>
+                    },
+                    ignore: [<% for(var i=0; i<links.length; i++) {%>'<%= links[i].property %>'<%if (i != links.length -1) { %>,<% } %><% } %>, '_id']
+                }<% } %>
             }
         }
     });
