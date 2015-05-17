@@ -9,7 +9,19 @@ server.connection({
     }
 });
 
+var good_options = {
+    opsInterval: 1000,
+    reporters: [{
+        reporter: require('good-console'),
+        events: {log: '*', response: '*'}
+    }]
+};
+
 var plugins = [
+    {
+        register: require('good'),
+        options: good_options
+    },
     {
         register: require('./v1'),
         options: config.server.options
@@ -25,8 +37,10 @@ server.register(plugins, function (err) {
     }
 });
 
-server.start(function (err, server) {
+server.start(function (err) {
     if (err) {
         console.log("err", err);
     }
+
+    console.info('Server started at ' + server.info.uri);
 });

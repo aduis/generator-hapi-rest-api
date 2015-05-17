@@ -15,7 +15,9 @@
         "hapi-swagger": "^0.7.3",
         "joi": "^6.4.1",
         "lodash": "^3.8.0",
-        "mongoose": "^4.0.3"
+        "mongoose": "^4.0.3",
+        "good": "^6.1.2",
+        "good-console": "^5.0.0"
     },
     "devDependencies": {
         "chai": "^2.3.0",
