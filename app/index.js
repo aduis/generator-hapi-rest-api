@@ -4,11 +4,27 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var plural = require('plural');
 var changeCase = require('change-case');
-var schemas = require("./schemas");
+var schemas = require('./schemas');
+var hoek = require('hoek');
 
 module.exports = yeoman.generators.Base.extend({
     initializing: function () {
         this.pkg = require('../package.json');
+    },
+
+    constructor: function () {
+        yeoman.generators.Base.apply(this, arguments);
+
+        this.option('resource');
+        this.option('fields');
+        this.option('port');
+        this.option('project');
+        this.option('dbcollection');
+        this.option('dbinstance');
+        this.option('giturl');
+        this.option('coveralls');
+        this.option('coverallskey');
+
     },
 
     prompting: function () {
@@ -17,61 +33,76 @@ module.exports = yeoman.generators.Base.extend({
         // Have Yeoman greet the user.
         this.log(yosay(
             'Welcome to the sensational ' + chalk.red('HapiRestAPI') + ' generator!'
-            ));
+        ));
 
-        var prompts = [
-            {
+        var prompts = [];
+
+        if (!this.options.resource)
+            prompts.push({
                 type: 'input',
                 name: 'resource',
                 message: 'Would is the name of your resource?',
                 default: 'address'
-            },
-            {
+            });
+
+        if (!this.options.fields)
+            prompts.push({
                 type: 'input',
                 name: 'fields',
                 message: 'What are the fields of the resource?',
                 default: 'street:string,street_number:number,postcode:number,city:string,is_deleted:bool'
-            },
-            {
+            });
+
+        if (!this.options.port)
+            prompts.push({
                 type: 'input',
                 name: 'port',
                 message: 'On what port do you want this api to listen?',
                 default: 8500
-            },
-            {
+            });
+
+        if (!this.options.project)
+            prompts.push({
                 type: 'input',
                 name: 'project',
                 message: 'What is the name of your project?',
                 default: 'address_rest_api'
-            },
-            {
+            });
+
+        if (!this.options.dbcollection)
+            prompts.push({
                 type: 'input',
-                name: 'db_collection',
+                name: 'dbcollection',
                 message: 'What is the name of the db collection?',
                 default: 'addresses'
-            },
-            {
+            });
+
+        if (!this.options.dbinstance)
+            prompts.push({
                 type: 'input',
-                name: 'db_instance',
+                name: 'dbinstance',
                 message: 'What is the url of your db instance?',
                 default: 'localhost:27017'
-            },
-            {
+            });
+
+        if (!this.options.giturl)
+            prompts.push({
                 type: 'input',
                 name: 'giturl',
                 message: 'What is the git url of this project?',
                 default: 'git@github.com:<github_user>/<project_name>'
-            },
-            {
+            });
+
+        if (this.options.coveralls && !this.options.coverallskey)
+            prompts.push({
                 type: 'input',
                 name: 'coverallskey',
                 message: 'Do you have a coveralls key?'
-            }
-        ];
+            });
 
         this.prompt(prompts, function (props) {
             var me = this;
-            me.props = props;
+            me.props = hoek.merge(props, me.options);
 
             me.props.resource = changeCase.camelCase(props.resource);
             me.props.Resource = changeCase.pascalCase(props.resource);
@@ -82,7 +113,7 @@ module.exports = yeoman.generators.Base.extend({
             var splittedFields = props.fields.split(',');
 
             me.props.fields = [];
-            splittedFields.forEach(function(field){
+            splittedFields.forEach(function (field) {
                 var splitted = field.split(':');
                 me.props.fields.push({
                     "name": splitted[0],
@@ -194,15 +225,15 @@ module.exports = yeoman.generators.Base.extend({
             this.fs.copy(
                 this.templatePath('editorconfig'),
                 this.destinationPath('.editorconfig')
-                );
+            );
             this.fs.copy(
                 this.templatePath('jshintrc'),
                 this.destinationPath('.jshintrc')
-                );
+            );
         }
     },
 
     install: function () {
-        this.installDependencies({ bower: false });
+        this.installDependencies({bower: false});
     }
 });
