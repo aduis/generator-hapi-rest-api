@@ -23,6 +23,9 @@ var plugins = [
         options: good_options
     },
     {
+        register: require('halacious')
+    },
+    {
         register: require('./v1'),
         options: config.server.options
     },
