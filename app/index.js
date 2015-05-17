@@ -22,6 +22,8 @@ module.exports = yeoman.generators.Base.extend({
         this.option('project');
         this.option('dbcollection');
         this.option('dbinstance');
+        this.option('userabbitmq');
+        this.option('rabbitinstance');
         this.option('giturl');
         this.option('coveralls');
         this.option('coverallskey');
@@ -100,6 +102,14 @@ module.exports = yeoman.generators.Base.extend({
                 name: 'dbinstance',
                 message: 'What is the url of your db instance?',
                 default: 'localhost:27017'
+            });
+
+        if (this.options.userabbitmq && !this.options.rabbitinstance)
+            prompts.push({
+                type: 'input',
+                name: 'rabbitinstance',
+                message: 'What is the url of your rabbitmq instance?',
+                default: 'localhost'
             });
 
         if (!this.options.giturl)

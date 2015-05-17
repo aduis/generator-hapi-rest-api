@@ -25,6 +25,12 @@ var plugins = [
     {
         register: require('halacious')
     },
+    <%if (userabbitmq) { %>{
+        register: require('hapi-rabbit'),
+        options: {
+            url: config.rabbit.uri
+        }
+    },<% } %>
     {
         register: require('./v1'),
         options: config.server.options

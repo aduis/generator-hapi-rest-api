@@ -13,6 +13,7 @@
         "boom": "^2.7.1",
         "hapi": "^8.4.0",
         "hapi-swagger": "^0.7.3",
+        <%if (userabbitmq) { %>"hapi-rabbit": "^0.0.4",<% } %>
         "joi": "^6.4.1",
         "lodash": "^3.8.0",
         "mongoose": "^4.0.3",
