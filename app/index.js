@@ -22,6 +22,7 @@ module.exports = yeoman.generators.Base.extend({
         this.option('project');
         this.option('dbcollection');
         this.option('dbinstance');
+        this.option('embedbooking');
         this.option('userabbitmq');
         this.option('rabbitinstance');
         this.option('giturl');

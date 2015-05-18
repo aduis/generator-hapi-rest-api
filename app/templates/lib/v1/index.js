@@ -48,7 +48,7 @@ module.exports.register = function (plugin, options, next) {
                     ignore: [<% for(var i=0; i<links.length; i++) {%>'<%= links[i].property %>'<%if (i != links.length -1) { %>,<% } %><% } %>, '_id'],<% } %>
                     prepare: function (rep, next) {
 
-                        if(rep.entity._customer){
+                        <%if (embedbooking) { %> if(rep.entity._customer){
                             rep.embed('customer', '/v1/customers/' + rep.entity._customer._id, rep.entity._customer);
                             rep.ignore('_customer');
                         }
@@ -62,7 +62,7 @@ module.exports.register = function (plugin, options, next) {
                                 embed.ignore('_service');
                             });
                             rep.ignore('cart');
-                        }
+                        }<% } %>
                         next();
                     }
                 }
