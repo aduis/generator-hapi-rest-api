@@ -1,5 +1,7 @@
 # Hapi REST API generator (generator-hapi-rest-api) [![Build Status](https://secure.travis-ci.org/aduis/generator-hapi-rest-api.png?branch=master)](https://travis-ci.org/aduis/generator-hapi-rest-api)
 
+[![Join the chat at https://gitter.im/aduis/generator-hapi-rest-api](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aduis/generator-hapi-rest-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > [Yeoman](http://yeoman.io) generator
 
 This generator generates a simple REST api using hapijs framework. Just follow the generator instructions and create your own api.
